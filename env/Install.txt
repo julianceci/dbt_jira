@@ -1,0 +1,18 @@
+
+#Instalación
+python3 -m venv venv #creación de enviroment
+source venv/bin/activate #activación de enviroment
+pip install -r requirements.txt #Instalamos las dependencias para el enviroment
+dbt deps #instalo dependencia y paquetes
+
+dbt init
+sudo cp env/profiles.yml ~/.dbt/ #copio el profiles del repo que usa un .env
+export $(grep -v '^#' .env | xargs) #cargo las variables de .env al entorno actual
+
+#Ejecución
+dbt debug --target dev #testea conexión para el entorno especificado
+dbt run
+dbt test
+
+dbt docs generate
+dbt docs serve --port 8888
